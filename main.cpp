@@ -49,7 +49,8 @@ int main(int, char**){
     for(size_t i = 0; i < n; i++){
         probabilities.push_back(0);
         std::cin >> probabilities.back();
-        ensemble.push_back(new Node {nullptr, nullptr, probabilities.back(), true, i});
+	Node *node = new Node {nullptr, nullptr, probabilities.back(), true, i};
+	ensemble.emplace(std::lower_bound(ensemble.begin(), ensemble.end(), node, cmp), node);
     }
 
     // Constructing the code tree.
@@ -77,3 +78,4 @@ int main(int, char**){
     std::cout << "Redundancy:     " << 1 - entropy/log2(n) << std::endl;
     
 }
+
