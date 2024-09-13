@@ -17,6 +17,13 @@ struct Node{
 
     // @brief Index of symbol input.Only applicable for leaf nodes.
     size_t index;
+
+    ~Node(){
+    	if(!leaf){
+	    delete lower;
+	    delete greater;
+	}
+    }
 };
 
 // @brief Compares nodes in non-increasing order.
@@ -67,6 +74,6 @@ int main(int, char**){
     }
     std::cout << "\nAverage length: " << average_len << std::endl;
     std::cout << "Entropy:        " << entropy << std::endl;
-    std::cout << "Redundancy:     " << average_len - entropy << std::endl;
+    std::cout << "Redundancy:     " << 1 - entropy/log2(n) << std::endl;
     
 }
